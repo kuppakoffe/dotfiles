@@ -1,0 +1,68 @@
+{
+    "go.autocompleteUnimportedPackages": true,
+    "go.formatTool": "goimports",
+    "editor.fontFamily": "'Operator Mono Lig',Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontSize": 13,
+    "go.lintTool": "golangci-lint",
+    "go.lintFlags": [
+        "--fast"
+    ],
+    "better-comments.multilineComments": true,
+    "better-comments.highlightPlainText": false,
+    "go.useCodeSnippetsOnFunctionSuggest": true,
+    "[go]": {
+        "editor.tabSize": 4,
+    },
+    "editor.fontLigatures": true,
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.editor.highlightModifiedTabs": true,
+    "explorer.confirmDelete": false,
+    "files.associations": {
+        "*.js": "javascriptreact"
+    },
+    "workbench.iconTheme": "seti",
+    "workbench.colorTheme": "Material Theme High Contrast",
+    "prettier.jsxSingleQuote": true,
+    "prettier.singleQuote": true,
+    "editor.formatOnSave": true,
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.formatOnSaveTimeout": 2000,
+    "editor.codeActionsOnSaveTimeout": 5000,
+    "go.useLanguageServer": true,
+    "rust-client.enableMultiProjectSetup": true,
+    "editor.fontWeight": "500",
+    "rust.show_warnings": true,
+    // "editor.renderWhitespace": "all",
+    "rust.all_features": true,
+    "editor.renderWhitespace": "boundary",
+    "editor.renderIndentGuides": true,
+    "files.trimFinalNewlines": true,
+    "workbench.colorCustomizations": {
+        "activityBarBadge.background": "#FF7042",
+        "list.activeSelectionForeground": "#FF7042",
+        "list.inactiveSelectionForeground": "#FF7042",
+        "list.highlightForeground": "#FF7042",
+        "scrollbarSlider.activeBackground": "#FF704250",
+        "editorSuggestWidget.highlightForeground": "#FF7042",
+        "textLink.foreground": "#FF7042",
+        "progressBar.background": "#FF7042",
+        "pickerGroup.foreground": "#FF7042",
+        "tab.activeBorder": "#FF7042",
+        "notificationLink.foreground": "#FF7042",
+        "editorWidget.resizeBorder": "#FF7042",
+        "editorWidget.border": "#FF7042",
+        "settings.modifiedItemIndicator": "#FF7042",
+        "settings.headerForeground": "#FF7042",
+        "panelTitle.activeBorder": "#FF7042",
+        "breadcrumb.activeSelectionForeground": "#FF7042",
+        "menu.selectionForeground": "#FF7042",
+        "menubar.selectionForeground": "#FF7042",
+        "editor.findMatchBorder": "#FF7042",
+        "selection.background": "#FF704240"
+    },
+    "materialTheme.accent": "Orange",
+    "go.buildTags": "-tags 'sqlite_vtable sqlite_json' -ldflags '-X bitbucket.org/logiqcloud/flash/utils/version.Version=1.0.0 -X bitbucket.org/logiqcloud/flash/utils/version.buildstamp=`date -u '+%Y-%m-%d_%I:%M:%S%p'` -X bitbucket.org/logiqcloud/flash/utils/version.githash=`git rev-parse --abbrev-ref HEAD`-`git rev-parse HEAD`'",
+    "editor.minimap.enabled": false
+}
