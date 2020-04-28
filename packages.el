@@ -48,12 +48,22 @@
 
 
 (package! emojify)
+(package! undo-tree)
+(package! protobuf-mode)
+(package! clang-format+)
+(package! selectric-mode)
 
 (package! awesome-pair :recipe (:host github :repo "manateelazycat/awesome-pair"))
+
 (package! centaur-tabs :recipe (:host github :repo "ema2159/centaur-tabs"))
+
 (package! visual-fill-column)
+
 (package! scrollkeeper :recipe (:host github :repo "alphapapa/scrollkeeper.el"))
 
+(package! eslintd-fix :recipe (:host github :repo "aaronjensen/eslintd-fix"))
+
+(package! yaml-mode :recipe (:host github :repo "yoshiki/yaml-mode"))
 
 
 
