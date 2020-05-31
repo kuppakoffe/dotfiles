@@ -24,7 +24,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-dark+)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -80,7 +80,7 @@
   ;;  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
   )
 ;; highlight brackets
-(setq show-paren-style 'parenthesis)
+;; (setq show-paren-style 'parenthesis)
 
 
 
@@ -251,10 +251,19 @@ In that case, insert the number."
 
 
 
+
+
+
+(setq treemacs-position                      'right
+
+
+)
+
+
 (use-package! centaur-tabs
   :config
  (setq centaur-tabs-style "bar"
-	  centaur-tabs-height 32
+	  centaur-tabs-height 35
 	  centaur-tabs-set-icons t
 	  centaur-tabs-set-modified-marker t
 	  centaur-tabs-show-navigation-buttons t
@@ -274,11 +283,12 @@ In that case, insert the number."
 
 (centaur-tabs-group-by-projectile-project)
 
-
+(global-set-key (kbd "C-c <right>")  'centaur-tabs-backward)
+(global-set-key (kbd "C-c <left>") 'centaur-tabs-forward)
 
 (add-hook 'js2-mode-hook 'eslintd-fix-mode)
 
-(global-undo-tree-mode)
+(global-undo-tree-mode t)
 
 
 
@@ -295,3 +305,68 @@ In that case, insert the number."
 (add-to-list 'auto-mode-alist '("\\.proto$" . protobuf-mode))
 (provide 'protobuf)
 
+
+
+(setq tide-tsserver-process-environment '("TSS_LOG=-level verbose -file /tmp/tss.log"))
+
+
+
+
+
+
+
+(use-package toml-mode)
+
+(use-package rust-mode
+  :hook (rust-mode . lsp))
+
+;; Add keybindings for interacting with Cargo
+(use-package cargo
+  :hook (rust-mode . cargo-minor-mode))
+
+(use-package flycheck-rust
+  :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+
+
+(setq rustic-lsp-server 'rust-analyzer)
+
+(setq rustic-format-trigger 'on-save)
+(setq rust-format-on-save t)
+
+(add-hook 'rust-mode-hook
+          (lambda () (setq indent-tabs-mode nil)))
+
+
+
+
+
+(use-package lsp-mode
+  :commands (lsp lsp-deferred)
+  :hook (go-mode . lsp-deferred))
+
+;; Set up before-save hooks to format buffer and add/delete imports.
+;; Make sure you don't have other gofmt/goimports hooks enabled.
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+
+;; Optional - provides fancier overlays.
+(use-package lsp-ui
+  :commands lsp-ui-mode)
+
+;; Company mode is a standard completion package that works well with lsp-mode.
+(use-package company
+  :config
+  ;; Optionally enable completion-as-you-type behavior.
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 1))
+
+;; Optional - provides snippet support.
+(use-package yasnippet
+  :commands yas-minor-mode
+  :hook (go-mode . yas-minor-mode))
+
+
+
+(set-cursor-color "#ff0000")

@@ -66,6 +66,18 @@
 (package! yaml-mode :recipe (:host github :repo "yoshiki/yaml-mode"))
 
 
+(package! atom-one-dark-theme :recipe (:host github :repo "jonathanchu/atom-one-dark-theme"))
+
+
+(package! nord :recipe (:host github :repo "arcticicestudio/nord-emacs"))
+
+
+(package! toml-mode :recipe (:host github :repo "dryman/toml-mode.el"))
+
+
+(package! flycheck-rust :recipe (:host github :repo "flycheck/flycheck-rust"))
 
 
 
+
+(package! lsp-mode :recipe (:host github :repo "emacs-lsp/lsp-mode"))
