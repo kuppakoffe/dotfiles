@@ -35,12 +35,13 @@ export NVM_DIR="$HOME/.nvm"
 alias fdb='docker start fdb'
 alias fredis='docker start fredis'
 # alias up='xrandr --output HDMI1 --auto --above eDP1'
-alias cat='batcat --style=changes,header'
+alias cat='bat --style=changes,header'
 alias fenv='source /home/sumit/.go/src/bitbucket.org/logiqcloud/redash-fork/venv/bin/activate'
-
+alias kx='kubectx|fzf'
 source <(minikube completion zsh)
 [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
 
 
 source ~/.myStuff
 eval "$(starship init zsh)"
+
