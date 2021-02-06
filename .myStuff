@@ -5,12 +5,34 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 
 
 alias lt='xrandr --output eDP-1 --right-of HDMI-1'
-alias cel='bin/run celery worker --app=redash.worker --beat -Qscheduled_queries,queries,celery -c2 #starts celery task manager'
-alias ser='bin/run ./manage.py runserver --debugger --reload --host 0.0.0.0'
+alias cel='source env/bin/activate && bin/run celery worker --app=redash.worker --beat -Qscheduled_queries,queries,celery -c2 #starts celery task manager'
+alias ser='source env/bin/activate && bin/run ./manage.py runserver --debugger --reload --host 0.0.0.0'
 
 
 export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 
 
-alias frun='export REDIS_HOST=localhost;export POSTGRES_HOST=localhost;cd /home/sumit/.go/src/bitbucket.org/logiqcloud/flash && go build  -tags "sqlite_vtable sqlite_json" && ./flash  --config examples/configs/sumit/config-free-sumit.yaml --runtime_folder=/home/sumit/._data'
+
+go env -w GOPRIVATE=bitbucket.org/logiqcloud/
+export GOPRIVATE=bitbucket.org/logiqcloud
+
+export JWE_AUTH_COOKIE_PRIVATE_KEY=/home/sumit/.go/src/bitbucket.org/logiqcloud/redash-fork/local_setup/sharedcerts/tls.key
+export JWE_AUTH_COOKIE_PUBLIC_KEY=/home/sumit/.go/src/bitbucket.org/logiqcloud/redash-fork/local_setup/sharedcerts/tls.crt
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+export GOPRIVATE=bitbucket.org/logiqcloud
+
+
+alias credis='docker create --name fredis -p 6379:6379   redis'
+alias cpostgres='docker create --name fdb -p 5432:5432 -e POSTGRES_PASSWORD=postgres -e POSTGRES_USERNAME=postgres  postgres'
+alias cminio='docker create --name fminio -p 9000:9000 \
+-e "MINIO_ACCESS_KEY=AKIAIOSFODNN7EXAMPLE" \
+-e "MINIO_SECRET_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" \
+minio/minio server /data'
+
+alias pm='cd /home/sumit/.opt/prometheus && ./prometheus --web.enable-admin-api'
+alias gf='cd /home/sumit/.opt/grafana/bin && ./grafana-server'
+alias postman='cd /home/sumit/.opt/Postman && touch /tmp/postman.log && ./Postman >>/tmp/postman.log 2>&1 &' 
+
+alias frun=' export REDIS_HOST=localhost;export POSTGRES_HOST=localhost;cd /home/sumit/.go/src/bitbucket.org/logiqcloud/flash && go build  -tags "sqlite_vtable sqlite_json" && ./flash  --config examples/configs/sumit/config-free-sumit.yaml --runtime_folder=/home/sumit/._data --load-from-file=true -pg_max_open_Conns 50 -postgres_timeout 20s --all'
+alias fk='frun >> ~/flash.log 2>&1 &'

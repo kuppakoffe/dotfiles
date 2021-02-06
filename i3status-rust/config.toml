@@ -1,0 +1,65 @@
+theme = "modern"
+icons = "awesome"
+
+[[block]]
+block = "pomodoro"
+length = 25
+break_length = 5
+message = "Take a break!"
+break_message = "Back to work!"
+use_nag = true
+nag_path = "i3-nagbar"
+
+[[block]]
+block = "docker"
+interval = 2
+format = "{running}/{total}"
+
+
+[[block]]
+block = "net"
+device = "wlp0s20f3"
+format = "{ssid} "
+interval = 5
+use_bits = false
+
+
+
+[[block]]
+block = "memory"
+format_mem = "{Mum}MB/{MTm}MB({Mup}%)"
+format_swap = "{SUm}MB/{STm}MB({SUp}%)"
+display_type = "memory"
+icons = true
+clickable = true
+interval = 5
+warning_mem = 80
+warning_swap = 80
+critical_mem = 95
+critical_swap = 95
+
+
+
+[[block]]
+block = "sound"
+
+
+
+[[block]]
+block = "time"
+interval = 60
+format = "%a %d/%m %R"
+
+
+
+[[block]]
+block = "battery"
+driver = "upower"
+format = "{percentage}% {time}"
+
+
+[[block]]
+block = "weather"
+format = "{weather} ({location}) {temp}°"
+service = { name = "openweathermap", api_key = "416b4357838266c2c8710dfc90e4c185", place = "560075", units = "metric" }
+autolocate = true
