@@ -5,8 +5,8 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 
 
 alias lt='xrandr --output eDP-1 --right-of HDMI-1'
-alias cel='source env/bin/activate && bin/run celery worker --app=redash.worker --beat -Qscheduled_queries,queries,celery -c2 #starts celery task manager'
-alias ser='source env/bin/activate && bin/run ./manage.py runserver --debugger --reload --host 0.0.0.0'
+alias cel='source env/bin/activate && QUERY_REPORTING_HOST=localhost;bin/run celery worker --app=redash.worker --beat -Qscheduled_queries,queries,celery -c2 #starts celery task manager'
+alias ser='source env/bin/activate && QUERY_REPORTING_HOST=localhost;bin/run ./manage.py runserver --debugger --reload --host 0.0.0.0'
 
 
 export LANG=en_US.UTF-8
@@ -34,5 +34,7 @@ alias pm='cd /home/sumit/.opt/prometheus && ./prometheus --web.enable-admin-api'
 alias gf='cd /home/sumit/.opt/grafana/bin && ./grafana-server'
 alias postman='cd /home/sumit/.opt/Postman && touch /tmp/postman.log && ./Postman >>/tmp/postman.log 2>&1 &' 
 
-alias frun=' export REDIS_HOST=localhost;export POSTGRES_HOST=localhost;cd /home/sumit/.go/src/bitbucket.org/logiqcloud/flash && go build  -tags "sqlite_vtable sqlite_json" && ./flash  --config examples/configs/sumit/config-free-sumit.yaml --runtime_folder=/home/sumit/._data --load-from-file=true -pg_max_open_Conns 50 -postgres_timeout 20s --all'
+alias frun='export REDIS_HOST=localhost;export POSTGRES_HOST=localhost;cd /home/sumit/.go/src/bitbucket.org/logiqcloud/flash && go build -tags "sqlite_vtable sqlite_json" && ./flash --config examples/configs/sumit/config-free-sumit.yaml --runtime_folder=/home/sumit/._data --load-from-file=true -pg_max_open_Conns 50 -postgres_timeout 20s --all --disable-auth-interceptor -prometheus-host http://localhost:9090 --tail_longpoll -event_rule_path /config'
+
 alias fk='frun >> ~/flash.log 2>&1 &'
+

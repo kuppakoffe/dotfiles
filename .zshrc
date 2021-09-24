@@ -32,11 +32,11 @@ export NVM_DIR="$HOME/.nvm"
 
 
 
-alias fdb='docker start fdb'
-alias fredis='docker start fredis'
-alias fminio='docker start fminio'
+alias fdb='docker start cpostgres'
+alias fredis='docker start credis'
+alias fminio='docker start cminio'
 # alias up='xrandr --output HDMI1 --auto --above eDP1'
-alias cat='bat --style=changes,header'
+alias cat='batcat --style=changes,header'
 alias fenv='source /home/sumit/.go/src/bitbucket.org/logiqcloud/redash-fork/venv/bin/activate'
 alias kx='kubectl -n logiq'
 source <(minikube completion zsh)
@@ -44,5 +44,27 @@ source <(minikube completion zsh)
 
 
 source ~/.myStuff
+function logiq(){
+	docker rm -f $(docker ps -aq)
+	docker create --name fredis -p 6379:6379   redis
+	docker create --name fdb -p 5432:5432 -e POSTGRES_PASSWORD=postgres -e POSTGRES_USERNAME=postgres  postgres
+	docker create --name fminio \
+  -p 9000:9000 \
+  -p 9001:9001 \
+  -e "MINIO_ROOT_USER=AKIAIOSFODNN7EXAMPLE" \
+  -e "MINIO_ROOT_PASSWORD=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" \
+  minio/minio server /data --console-address ":9001"
+	docker start fredis
+docker start fdb
+docker start fminio
+}
+
+function ff(){
+	docker start fredis
+docker start fdb
+docker start fminio
+}
+
+export QUERY_REPORTING_HOST="localhost"
 eval "$(starship init zsh)"
 
