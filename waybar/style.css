@@ -1,275 +1,255 @@
-/* =============================================================================
- *
- * Waybar configuration
- *
- * Configuration reference: https://github.com/Alexays/Waybar/wiki/Configuration
- *
- * =========================================================================== */
+/* ----- General ----- */
+@import "mocha.css";
 
-/* -----------------------------------------------------------------------------
- * Keyframes
- * -------------------------------------------------------------------------- */
-
-@keyframes blink-warning {
-    70% {
-        color: @light;
-    }
-
-    to {
-        color: @light;
-        background-color: @warning;
-    }
-}
-
-@keyframes blink-critical {
-    70% {
-      color: @light;
-    }
-
-    to {
-        color: @light;
-        background-color: @critical;
-    }
-}
-
-
-/* -----------------------------------------------------------------------------
- * Styles
- * -------------------------------------------------------------------------- */
-
-/* Default colors */
-@define-color light #eceff4;
-@define-color dark #2e3440;
-@define-color warning #ebcb8b;
-@define-color critical #d08770;
-
-/* Reset all styles */
 * {
-    border: none;
-    border-radius: 0;
-    min-height: 0;
-    margin: 0;
-    padding: 0;
+  font-family: JetBrainsMono Nerd Font;
+  font-weight: bold;
+  font-size: 15px;
+  min-height: 0;
 }
 
-/* The whole bar */
-#waybar {
-    /*background: #2e3440;*/
-    /*background: rgba(46, 52, 64, 0.8);*/
-    background: transparent;
-    color: #eceff4;
-    font-family: Iosevka, xos4 Terminus, FiraCode, Noto Sans;
-    font-size: 13px;
-    font-weight: bold;
+window#waybar {
+  background-color: transparent;
+  color: @fg;
+  transition-property: background-color;
+  border-radius: 12px;
+  transition-duration: .5s;
 }
 
-/* Each module */
-#battery,
-#clock,
-#cpu,
-#custom-keyboard-layout,
-#memory,
-#mode,
-#network,
-#pulseaudio,
-#temperature,
-#custom-alsa,
-#tray {
-    padding-left: 10px;
-    padding-right: 10px;
+/* ----- Custom Menu ----- */
+
+#custom-menu {
+  padding: 2px 15px;
+  margin: 5px;
+  color: @green;
+  background-color: @bg;
+  border: none;
+  border-radius: 8px 0px 0px 8px;
 }
 
-/* Each module that should blink */
-#mode,
-#memory,
-#temperature,
-#battery {
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+#custom-menu:hover {
+  color: @fl;
 }
 
-/* Each critical module */
-#memory.critical,
-#cpu.critical,
-#temperature.critical,
-#battery.critical {
-    color: @critical;
+/* ----- Workspaces ----- */
+
+#workspaces {
+  padding: 2px 12px;
+  margin: 5px;
+  background-color: @bg;
+  border-radius: 0px;
 }
 
-/* Each critical that should blink */
-#mode,
-#memory.critical,
-#temperature.critical,
-#battery.critical.discharging {
-    animation-name: blink-critical;
-    animation-duration: 2s;
-}
-
-/* Each warning */
-#network.disconnected,
-#memory.warning,
-#cpu.warning,
-#temperature.warning,
-#battery.warning {
-    color: @warning;
-}
-
-/* Each warning that should blink */
-#battery.warning.discharging {
-    animation-name: blink-warning;
-    animation-duration: 3s;
-}
-
-/* And now modules themselves in their respective order */
-
-#mode { /* Shown current Sway mode (resize etc.) */
-    color: @light;
-    background: #bf616a;
-}
-
-/* Workspaces stuff */
 #workspaces button {
-    font-weight: bold; /* Somewhy the bar-wide setting is ignored*/
-    /* All these comments are here just for reference */
-    /*border-bottom: 3px solid transparent;
-    To compensate for the bottom border and still have vertical centering
-    padding-top: 3px;*/
-    padding-left: 5px;
-    padding-right: 5px;
-    color: @dark;
-    background: #5e81ac;
+  padding: 0px 3px;
+  background-color: transparent;
+  color: @overlay0;
+  transition: all 0.1s linear;
 }
 
-#workspaces button.focused {
-    background: #81a1c1;
+#workspaces button:hover {
+  color: @vl;
+  transition: all 0.1s linear;
 }
 
-#workspaces button.urgent { /* Not used at all, maybe I'll delete it soon */
-    border-color: #c9545d;
-    color: #c9545d;
+#workspaces button.active {
+  color: @fg;
 }
+
+#workspaces button.active:hover {
+  color: @vl;
+}
+
+#workspaces button.urgent {
+  color: @red;
+}
+
+/* ----- Button..? ----- */
+
+button {
+  box-shadow: inset 0 -3px transparent;
+  border: none;
+  border-radius: 0px;
+}
+
+button:hover {
+  background: inherit;
+  box-shadow: inset 0 -3px transparent;
+}
+
+/* ----- Window ----- */
 
 #window {
-    margin-right: 40px;
-    margin-left: 40px;
+  padding: 2px 15px;
+  margin: 5px;
+  color: @fg;
+  background-color: @bg;
+  border-radius: 0px 8px 8px 0px;
 }
 
-#custom-alsa {
-    background: #d8dee9;
-    color: @dark;
+#window:hover {
+  color: @vl;
 }
 
-#network {
-    background: #4c566a;
-    color: @light;
-}
-
-#memory {
-    background: #88c0d0;
-    color: @dark;
-}
-
-#cpu {
-    background: #434c5e;
-    color: @light;
-}
-
-#temperature {
-    background: #d8dee9;
-    color: @dark;
-}
-
-#custom-keyboard-layout {
-    background: #5e81ac;
-    color: @light;
-}
-
-#battery {
-    background: #88c0d0;
-    color: @dark;
-}
+/* ----- Tray ----- */
 
 #tray {
-    background: #2e3440;
+  padding: 2px 15px;
+  margin: 5px;
+  background-color: @bg;
+  border-radius: 0px;
 }
 
-#clock.date {
-    background: #2e3440;
-    color: @light;
+/* ----- Taskbar ----- */
+
+#taskbar {
+  padding-left: 5px;
+  padding-right: 0px;
+  margin: 5px 5px 5px 5px;
+  background-color: @bg;
+  border-radius: 0px;
 }
 
-#clock.time {
-    background: #eceff4;
-    color: @dark;
+#taskbar button {
+  box-shadow: none;
+  text-shadow: none;
+  margin: 3px 0px 3px 0px;
+  padding: 0px 2px 0px 2px;
+  border-radius: 8px;
 }
 
-#pulseaudio { /* Unsused but kept for those who needs it */
-    background: #d8dee9;
-    color: @dark
+#taskbar button:hover {
+  border-radius: 8px;
+  transition: all 0.1s linear;
+}
+
+/* ----- Language ----- */
+
+#language {
+  padding: 2px 15px;
+  margin: 5px;
+  color: @fg;
+  background-color: @bg;
+  border-radius: 8px 0px 0px 8px;
+}
+
+#language:hover {
+  color: @blue;
+}
+
+/* ----- Battery ----- */
+
+#battery {
+  padding: 2px 15px;
+  margin: 5px;
+  color: @fg;
+  background-color: @bg;
+  border-radius: 0px;
+}
+
+#battery:hover {
+  color: @green;
+}
+
+/* ----- Pulseaudio (aka Pipewire) ----- */
+
+#pulseaudio {
+  padding: 2px 15px;
+  margin: 5px;
+  color: @fg;
+  background-color: @bg;
+  border-radius: 0px;
 }
 
 #pulseaudio.muted {
-    /* No styles */
+  color: @red;
 }
 
-#custom-arrow1 {
-    font-size: 16px;
-    color: #d8dee9;
-    background: transparent;
+#pulseaudio:hover {
+  color: @yellow;
 }
 
-#custom-arrow2 {
-    font-size: 16px;
-    color: #4c566a;
-    background: #d8dee9;
+/* ----- Clock ----- */
+
+#clock {
+  padding: 2px 15px;
+  margin: 5px;
+  color: @fg;
+  background-color: @bg;
+  border-radius: 8px;
 }
 
-#custom-arrow3 {
-    font-size: 16px;
-    color: #88c0d0;
-    background: #4c566a;
+#clock:hover {
+  color: @sky;
 }
 
-#custom-arrow4 {
-    font-size: 16px;
-    color: #434c5e;
-    background: #88c0d0;
+/* ----- Weather ----- */
+
+#custom-weather {
+  padding: 2px 15px;
+  margin: 5px;
+  color: @fg;
+  background-color: @bg;
+  border-radius: 10px;
 }
 
-#custom-arrow5 {
-    font-size: 16px;
-    color: #d8dee9;
-    background: #434c5e;
+#custom-weather:hover {
+  color: @sky;
 }
 
-#custom-arrow6 {
-    font-size: 16px;
-    color: #5e81ac;
-    background: #d8dee9;
+/* ----- Power ----- */
+
+#custom-power {
+  padding: 2px 15px;
+  margin: 15px;
+  color: @vl;
+  background-color: @bg;
+  border-radius: 20px;
+  color: #bf0609;
 }
 
-#custom-arrow7 {
-    font-size: 16px;
-    color: #88c0d0;
-    background: #5e81ac;
+#custom-power:hover {
+  color: @red;
 }
 
-#custom-arrow8 {
-    font-size: 16px;
-    color: #2e3440;
-    background: #88c0d0;
+/* ----- Tooltip ----- */
+
+tooltip {
+  background: @bg2;
+  margin: 20px;
+  padding: 15px;
+  border-radius: 14px;
 }
 
-#custom-arrow9 {
-    font-size: 16px;
-    color: #eceff4;
-    background: #2e3440;
+
+#custom-ws,
+#workspaces,
+#window,
+#custom-temperature,
+#memory,
+#cpu,
+#idle_inhibitor,
+#clock,
+#custom-wifi,
+#bluetooth,
+#custom-update,
+#mpris,
+#pulseaudio,
+#backlight,
+#battery,
+#custom-power {
+  opacity: 1;
+  color: @fg;
+  background: @bg;
+  padding: 0 15px;
+  margin: 5px;
+  border-radius: 20px;
 }
 
-#custom-arrow10 {
-    font-size: 16px;
-    color: #5e81ac;
-    background: transparent;
+#bluetooth {
+  color: #9689e8;
 }
 
+#custom-wifi {
+  color: #b4dce0;
+}

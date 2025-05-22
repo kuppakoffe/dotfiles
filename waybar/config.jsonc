@@ -1,0 +1,363 @@
+// -*- mode: jsonc -*-
+{
+  //"margin-top": 10,
+  "height": 35,
+  "spacing": 0,
+  "margin-top": 2,
+  "margin-left": 18,
+  "margin-right": 18,
+  "reload_style_on_change": true,
+  "modules-left": [
+    "hyprland/workspaces",
+    "tray",
+    "hyprland/window"
+  ],
+  "modules-center": [
+    "clock",
+    "custom/weather",
+    "custom/wifi",          // wi-fi
+    "bluetooth"           // bluetooth
+  ],
+  "modules-right": [
+    "mpris",
+    "pulseaudio",
+    "backlight",
+    "battery",
+    "custom/power"
+  ],
+  "custom/menu": {
+    "format": "{icon}",
+    "format-icons": "",
+    "on-click": "~/.config/rofi/launchers/type-2/launcher_2.sh",
+    "escape": true,
+    "tooltip": false
+  },
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "on-click": "activate",
+    "on-scroll-up": "hyprctl dispatch workspace -1",
+    "on-scroll-down": "hyprctl dispatch workspace +1",
+    "format-icons": {
+      "urgent": "",
+      "active": "",
+      "default": ""
+    },
+    "tooltip": true,
+    "persistent-workspaces": {
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": []
+    },
+    "escape": true
+  },
+
+
+   "custom/wifi": {
+    "exec": "~/.config/waybar/scripts/wifi-status.sh",
+    "return-type": "json",
+    "format": "{}",
+    "on-click": "~/.config/waybar/scripts/wifi-menu.sh",
+    "on-click-right": "kitty --title '󰤨  Network Manager TUI' bash -c nmtui",
+    "interval": 1,
+    "min-length": 1,
+    "max-length": 1
+  },
+
+  "hyprland/window": {
+    "format": "{}",
+    "tooltip": false,
+    "min-length": 5,
+
+    "rewrite": {
+      // Desktop
+      "":
+        "<span foreground='#8aadf4'> </span> Hyprland",
+
+      // Terminal
+      "~": "  Terminal",
+      "zsh": "  Terminal",
+      "kitty": "  Terminal",
+
+      "tmux(.*)":
+        "<span foreground='#a6e3a1'> </span> Tmux",
+
+      // Browser
+
+      "(.*)Mozilla Firefox":
+        "<span foreground='#ed8796'>󰈹 </span> Firefox",
+      "(.*) — Mozilla Firefox":
+        "<span foreground='#ed8796'>󰈹 </span> $1",
+
+      "(.*)Zen Browser":
+        "<span foreground='#f5a97f'>󰺕 </span> Zen Browser",
+      "(.*) — Zen Browser":
+        "<span foreground='#f5a97f'>󰺕 </span> $1",
+
+      // Development
+
+      "(.*) - Visual Studio Code":
+        "<span foreground='#8aadf4'>󰨞 </span> $1",
+      "(.*)Visual Studio Code":
+        "<span foreground='#8aadf4'>󰨞 </span> Visual Studio Code",
+
+      "nvim":
+        "<span foreground='#a6da95'> </span> Neovim",
+      "nvim (.*)":
+        "<span foreground='#a6da95'> </span> $1",
+
+      "vim":
+        "<span foreground='#a6da95'> </span> Vim",
+      "vim (.*)":
+        "<span foreground='#a6da95'> </span> $1",
+      "emacs (.*)":
+        "<span foreground='#a6da95'> </span> $1",
+      // Media
+
+      "(.*)Spotify":
+        "<span foreground='#a6da95'> </span> Spotify",
+      "(.*)Spotify Premium":
+        "<span foreground='#a6da95'> </span> Spotify Premium",
+
+      "OBS(.*)":
+        "<span foreground='#a5adcb'> </span> OBS Studio",
+
+      "VLC media player":
+        "<span foreground='#f5a97f'>󰕼 </span> VLC Media Player",
+      "(.*) - VLC media player":
+        "<span foreground='#f5a97f'>󰕼 </span> $1",
+
+      "(.*) - mpv":
+        "<span foreground='#c6a0f6'> </span> $1",
+
+      "qView": "  qView",
+
+      "(.*).jpg": "  $1.jpg",
+      "(.*).png": "  $1.png",
+      "(.*).svg": "  $1.svg",
+
+      // Social
+
+      "vesktop":
+        "<span foreground='#8aadf4'> </span> Discord",
+
+      "• Discord(.*)": "Discord$1",
+      "(.*)Discord(.*)":
+        "<span foreground='#8aadf4'> </span> $1Discord$2",
+
+      // Documents
+
+      "ONLYOFFICE Desktop Editors":
+        "<span foreground='#ed8796'> </span> OnlyOffice Desktop",
+
+      "(.*).docx":
+        "<span foreground='#8aadf4'> </span> $1.docx",
+      "(.*).xlsx":
+        "<span foreground='#a6da95'> </span> $1.xlsx",
+      "(.*).pptx":
+        "<span foreground='#f5a97f'> </span> $1.pptx",
+      "(.*).pdf":
+        "<span foreground='#ed8796'> </span> $1.pdf",
+
+      // System
+      "Authenticate": "  Authenticate"
+    }
+  },
+
+
+
+  "custom/cmus": {
+    "format": "{icon} {}",
+    "format-icons": {
+      "default": [
+        "<span color='#cba6f7'></span>"
+      ]
+    },
+    "max-length": 45,
+    "interval": 1,
+    "exec": "cmus-remote -C \"format_print '%F'\"",
+    "exec-if": "pgrep cmus",
+    "on-click": "cmus-remote -u",
+    "on-scroll-up": "cmus-remote --next",
+    "on-scroll-down": "cmus-remote --prev",
+    "escape": true,
+    "tooltip": false
+  },
+  "tray": {
+    "icon-size": 18,
+    "spacing": 10
+  },
+  "hyprland/language": {
+    "format": "<span color='#89b4fa'>󰌏</span> {}",
+    "format-en": "EN",
+    "format-ru": "RU"
+  },
+  "wlr/taskbar": {
+    "format": "{icon}",
+    "rotate": 0,
+    "icon-size": 18,
+    "icon-theme": "Papirus-Dark",
+    "spacing": 0,
+    "tooltip-format": "{title}",
+    "on-click": "activate",
+    "on-click-middle": "close"
+  },
+  "battery": {
+    "interval": 10,
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "<span color='#a6e3a1'>{icon}</span> {capacity}%",
+    "format-icons": {
+      "charging": [
+        "󰢜",
+        "󰂆",
+        "󰂇",
+        "󰂈",
+        "󰢝",
+        "󰂉",
+        "󰢞",
+        "󰂊",
+        "󰂋",
+        "󰂅"
+      ],
+      "default": [
+        "󰁺",
+        "󰁻",
+        "󰁼",
+        "󰁽",
+        "󰁾",
+        "󰁿",
+        "󰂀",
+        "󰂁",
+        "󰂂",
+        "󰁹"
+      ]
+    },
+    "max-length": 25
+  },
+  "pulseaudio": {
+    "scroll-step": 5,
+    "format": "<span color='#f9e2af'>{icon}</span> {volume}%",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "on-click": "pavucontrol",
+    "tooltip": false
+  },
+    "custom/wifi": {
+    "exec": "~/.config/waybar/scripts/wifi-status.sh",
+    "return-type": "json",
+    "format": "{}",
+    "on-click": "~/.config/waybar/scripts/wifi-menu.sh",
+    "on-click-right": "kitty --title '󰤨  Network Manager TUI' bash -c nmtui",
+    "interval": 1,
+    "min-length": 1,
+    "max-length": 1
+  },
+
+  "bluetooth": {
+    "format": "󰂰",
+    "format-disabled": "󰂲",
+    "format-connected": "󰂱",
+    "format-connected-battery": "󰂱",
+
+    "tooltip-format":
+      "{num_connections} connected",
+    "tooltip-format-disabled":
+      "Bluetooth Disabled",
+    "tooltip-format-connected":
+      "{device_enumerate}",
+    "tooltip-format-enumerate-connected":
+      "{device_alias}",
+    "tooltip-format-enumerate-connected-battery":
+      ":: {device_alias}: 󱊣 {device_battery_percentage}%",
+
+    "on-click": "~/.config/waybar/scripts/bluetooth-menu.sh",
+    "on-click-right": "kitty --title '󰂯  Bluetooth TUI' bash -c bluetui",
+    "interval": 1,
+    "min-length": 1,
+    "max-length": 1
+  },
+
+  "clock": {
+    "format": "<span color='#89dceb'>󰥔</span> {:%H:%M}",
+    "tooltip-format": "<big><span color='#89dceb'>{:%Y %B}</span></big>\n<tt><small>{calendar}</small></tt>",
+    "format-alt": "<span color='#89dceb'></span> <span color='#89dceb'>{:%Y-%m-%d}</span>",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#cdd6f4'><b>{}</b></span>",
+        "days": "<span color='#cdd6f4'><b>{}</b></span>",
+        "weeks": "<span color='#f5c2e7'><b>W{}</b></span>",
+        "weekdays": "<span color='#f5c2e7'><b>{}</b></span>",
+        "today": "<span color='#eba0ac'><b><u>{}</u></b></span>"
+      }
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-click-forward": "tz_up",
+      "on-click-backward": "tz_down",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
+  },
+  "custom/power": {
+    "format": "{icon}",
+    "format-icons": "⏻",
+    "on-click": "~/.config/rofi/powermenu/type-2/powermenu.sh",
+    "escape": true,
+    "tooltip": false
+  },
+  "custom/weather": {
+    "format": "{}",
+    "tooltip": true,
+    "interval": 1800,
+    "exec": "python $HOME/.config/waybar/modules/weather.py",
+    "return-type": "json"
+  },
+   "backlight": {
+    "format": "{icon} {percent}%",
+    "format-icons": ["", "", "", "", "", "", "", "", ""],
+    "tooltip": false,
+    "on-scroll-up": "~/.config/waybar/scripts/brightness-control.sh -o i",
+    "on-scroll-down": "~/.config/waybar/scripts/brightness-control.sh -o d",
+    "min-length": 6,
+    "max-length": 6
+  },
+    "mpris": {
+    "format": "{player_icon} {title} - {artist}",
+    "format-paused": "{status_icon} {title} - {artist}",
+
+    "player-icons": {
+      "default": "󰝚 ",
+      "spotify": "<span foreground='#a6da95'>󰓇 </span>",
+      "firefox": "<span foreground='#ed8796'>󰗃 </span>"
+    },
+    "status-icons": {
+      "paused": "<span color='#b7bdf8'>\u200A\u200A󰏤\u2009\u2009</span>"
+    },
+
+    "tooltip-format": "Playing: {title} - {artist}",
+    "tooltip-format-paused": "Paused: {title} - {artist}",
+    "min-length": 5,
+    "max-length": 35
+  },
+
+  "escape": true
+}
